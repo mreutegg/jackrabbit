@@ -20,15 +20,19 @@ package org.apache.jackrabbit.api.binary;
 
 import java.net.URI;
 
+import javax.jcr.Binary;
 import javax.jcr.RepositoryException;
 
 import org.jetbrains.annotations.Nullable;
+import org.osgi.annotation.versioning.ProviderType;
 
 /**
  * This extension interface provides a mechanism whereby a client can download
- * a {@link javax.jcr.Binary} directly from a storage location.
+ * a {@link Binary} directly from a storage location.
  */
-public interface BinaryDirectDownload {
+@ProviderType
+public interface BinaryDirectDownload extends Binary {
+
     /**
      * Get a URI for downloading the binary directly from a storage location.
      * This is probably a signed URI with a short TTL, although the API does
@@ -37,7 +41,7 @@ public interface BinaryDirectDownload {
      * @return A URI for downloading the binary directly, or {@code null} if the
      *         binary cannot be download directly or if the underlying
      *         implementation does not support this capability.
-     * @throws {@link RepositoryException} if an error occurs trying to locate
+     * @throws RepositoryException if an error occurs trying to locate
      *         the binary.
      */
     @Nullable

@@ -20,6 +20,9 @@ package org.apache.jackrabbit.api.binary;
 
 import java.net.URI;
 
+import org.jetbrains.annotations.NotNull;
+import org.osgi.annotation.versioning.ProviderType;
+
 /**
  * This extension interface provides a mechanism whereby a client can upload a
  * binary directly to the storage location.  An object of this type can be
@@ -44,7 +47,9 @@ import java.net.URI;
  * obtained from a {@link BinaryDirectUpload} by calling {@link
  * #getUploadToken()}.
  */
+@ProviderType
 public interface BinaryDirectUpload {
+
     /**
      * Returns an {@link Iterable} of URIs that can be used for uploading binary
      * data directly to a storage location.  The first URI can be used for
@@ -87,6 +92,7 @@ public interface BinaryDirectUpload {
      * @return Iterable of URIs that can be used for uploading directly to a
      *         storage location.
      */
+    @NotNull
     Iterable<URI> getUploadURIs();
 
     /**
@@ -111,8 +117,8 @@ public interface BinaryDirectUpload {
      * <p>
      * The API guarantees that a client can successfully complete a direct
      * upload of the binary data of the requested size using the provided URIs
-     * by splitting the binary data into parts of the size returned by {@link
-     * #getMaxPartSize()}.
+     * by splitting the binary data into parts of the size returned by this
+     * method.
      * <p>
      * The client is not required to use part sizes of this size; smaller sizes
      * may be used so long as they are at least as large as the size returned by
@@ -139,5 +145,6 @@ public interface BinaryDirectUpload {
      *
      * @return This upload's unique upload token.
      */
+    @NotNull
     String getUploadToken();
 }
